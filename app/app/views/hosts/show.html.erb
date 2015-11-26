@@ -1,0 +1,7 @@
+<%= render 'partials/show',
+           record: @host,
+           attributes: [ { title: :Description, name: :description, object: :parent },
+                         { title: :'IP/Host Name', name: :ip_or_host_name, object: :parent },
+                         { title: :Port, name: :port }
+                       ]
+%>

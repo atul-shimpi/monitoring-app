@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>App</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<script>
+    $(document).ready(function()
+
+    {
+        $('input:text:first').focus();
+    });
+</script>
+
+<div id="app_window">
+  <div id="session_menu_bar"></div>
+  <div id="app_title_bar">
+    Monitoring System
+  </div>
+  <div id="app_menu_bar">
+    <div class="app_menu"> <%= link_to('Dashboard', root_path) %> </div>
+    <div class="app_menu"> <%= link_to('Hosts', hosts_path) %> </div>
+  </div>
+  <%= yield %>
+</div>
+
+</body>
+</html>

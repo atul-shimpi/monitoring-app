@@ -1,0 +1,2 @@
+class DiskUsage < MetricUsage
+end

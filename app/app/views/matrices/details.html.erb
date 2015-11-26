@@ -1,0 +1,18 @@
+<%= render 'partials/show_all',
+           title: 'Host Matrices',
+           columns: [ :Time,
+                      :Metric,
+                      :'Value (%)'
+                    ],
+           attributes: [ :collection_time_humanize,
+                         :type_humanize,
+                         :usage
+                       ],
+           model_links: [{export_to_pdf: {type: :button, title: :'Export to PDF',
+                                          url_path: :host_matrices_details_pdf
+                                         }
+                         }
+                        ],
+           records: @host_matrices,
+           actions: :none
+%>

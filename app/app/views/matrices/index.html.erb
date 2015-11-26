@@ -1,0 +1,39 @@
+<%= render 'partials/show_all',
+           title: 'Dashboard',
+           columns: [ :'Description',
+                      :'IP/Host Name',
+                      :'Connection',
+                      :Platform,
+                      :'Monitoring Duration',
+                      :'Avg CPU Usage',
+                      :'Avg Disk Usage'
+                    ],
+           sub_heading_columns: [ :' ',
+                      :' ',
+                      :' ',
+                      :' ',
+                      :'(Hours)',
+                      :'(%)',
+                      :'(%)'
+           ],
+           attributes: [ :description,
+                         :ip_or_host_name,
+                         :'connection_status.humanize',
+                         :platform,
+                         :monitoring_duration_in_hours,
+                         :avg_cpu_usage,
+                         :avg_disk_usage
+                       ],
+           records: @hosts,
+           actions: :none,
+           model_links: [{collect: {type: :button, title: :'Collect Matrices', url_path: :collect_matrices_path},
+                          export_to_pdf: {type: :button, title: :'Export to PDF', url_path: :host_matrices_pdf}}
+                        ],
+           objects_links: [{view_details: {title: :Details,
+                                           url_path: 'host_matrices_details_path',
+                                           paramsx: 'id',
+                                           params: {host_id: :id}
+                                          }
+                           }
+                          ]
+%>

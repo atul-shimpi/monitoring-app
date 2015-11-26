@@ -1,0 +1,13 @@
+<%= render 'partials/show_all',
+           title: 'Hosts',
+           columns: [ :'Description',
+                      :'IP/Host Name',
+                      :Port
+                    ],
+           attributes: [ :description,
+                         :ip_or_host_name,
+                         :port
+                       ],
+           records: @hosts,
+           actions: :CRUD
+%>

@@ -1,0 +1,33 @@
+<%= render 'partials/primary_task_title', title: object.new_record? ? 'Create' : 'Edit' %>
+
+<%= form_for(object, :html => { :role => 'form', :class=>"form-horizontal"} ) do |this_form| %>
+  <% exclude_attributes = local_assigns.key?(:exclude_attributes) ? exclude_attributes : [] %>
+  <% exclude_attributes.push('id', 'created_at', 'updated_at', object.model_name.singular + '_id') %>
+    <% nested_objects = local_assigns.key?(:nested_objects) ? nested_objects : [] %>
+  <% exclude_attributes += nested_objects.collect { |nested_object| nested_object.model_name.singular + '_id' } %>
+
+  <% object.attributes.keys.each do |key| %>
+    <% next if exclude_attributes.include?(key) %>
+    <%= render 'partials/text_field', form: this_form, caption: object.class.human_attribute_name(key), attr_name: key %>
+  <% end %>
+
+  <% nested_objects.each do |nested_object| %>
+    <%= fields_for(nested_object) do |nested_form| %>
+      <% nested_object.attributes.keys.each do |key| %>
+        <% next if exclude_attributes.include?(key) %>
+         <% if attr_foreign_key?(key) %>
+           <%= render('partials/drop_down_list', form: nested_form,
+                       model: object.class.human_attribute_name(key).camelcase.constantize,
+                       caption: object.class.human_attribute_name(key), attr_name: key)
+           %>
+         <% else %>
+           <%= render('partials/text_field', form: nested_form,
+                       caption: object.class.human_attribute_name(key), attr_name: key)
+           %>
+         <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%= render 'partials/save_cancel', form: this_form %>
+<% end %>

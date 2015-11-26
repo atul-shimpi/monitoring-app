@@ -1,0 +1,22 @@
+<%= render 'partials/primary_task_title',
+           title: local_assigns.key?(:title) ? title : record.model_name
+%>
+
+<table class="show-table" >
+  <% sections = local_assigns.key?(:sections) ? sections : {} %>
+  <% attributes.each_with_index do |attribute, index| %>
+
+    <% if sections.value?(attribute[:name]) %>
+        <tr class="sections" >
+          <td> <%= sections.key(attribute[:name]) %> </td>
+        </tr>
+    <% end %>
+
+    <tr>
+      <td class="show-row" > <%= attribute[:title].to_s + ' : ' %> </td>
+      <td> <%= method_path(record, attribute[:name]) %> </td>
+    </tr>
+
+  <% end %>
+
+</table>

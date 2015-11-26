@@ -1,0 +1,2 @@
+class CPUUsageMatricesRecordIds < HostAndMatricesRecordId
+end

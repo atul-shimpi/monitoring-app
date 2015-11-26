@@ -1,0 +1,14 @@
+<div class="form-group">
+  <%= form.label(caption,
+                 :class => 'control-label col-sm-1')
+  %>
+
+  <div class="col-md-4">
+    <%= form.select(attr_name,
+                    model.all.collect { |each_object| [each_object.name, each_object.id] },
+                    {},
+                    {:class => 'form-control'}
+                   )
+    %>
+  </div>
+</div>
